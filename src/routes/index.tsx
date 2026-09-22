@@ -136,7 +136,7 @@ function Index() {
             </div>
             <span className="rune-orbit absolute left-1/2 top-1/2 h-[400px] w-[400px] border border-primary/20" />
             <div
-              className="absolute bottom-0 left-1/2 h-[94%] w-auto max-w-none -translate-x-1/2"
+              className="absolute bottom-0 left-1/2 h-[104%] w-auto max-w-none -translate-x-1/2"
               style={shift(10)}
             >
               <img
