@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ChevronRight, LockKeyhole, Sparkles, Sword, Wind } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Curtain } from "@/components/curtain";
 import character from "@/assets/aetheris-character.png";
 import atmosphere from "@/assets/elemental-atmosphere.jpg";
 
