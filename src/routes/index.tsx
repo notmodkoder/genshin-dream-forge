@@ -140,7 +140,7 @@ function Index() {
               width={1152}
               height={1536}
               alt="Aetheris, an original wind-element swordswoman"
-              className="absolute bottom-0 left-1/2 h-[88%] w-auto max-w-none -translate-x-1/2 object-contain"
+              className="absolute bottom-0 left-1/2 h-[97%] w-auto max-w-none -translate-x-1/2 object-contain"
               style={shift(10)}
             />
             <span className="absolute inset-0 bg-[linear-gradient(0deg,var(--background)_2%,transparent_55%)]" />
