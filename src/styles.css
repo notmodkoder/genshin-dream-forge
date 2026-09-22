@@ -342,6 +342,7 @@
 
 .aetheris-float {
   will-change: transform;
+  transform-origin: bottom center;
   animation: aetheris-float 6s ease-in-out infinite;
 }
 
