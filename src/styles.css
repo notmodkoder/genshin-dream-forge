@@ -342,12 +342,13 @@
 
 .aetheris-float {
   will-change: transform;
+  transform-origin: bottom center;
   animation: aetheris-float 6s ease-in-out infinite;
 }
 
 @keyframes aetheris-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+  0%, 100% { transform: translateY(0) scale(1.06); }
+  50% { transform: translateY(-14px) scale(1.06); }
 }
 
 @media (max-width: 1023px) {
