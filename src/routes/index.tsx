@@ -43,14 +43,6 @@ function Index() {
 
   return (
     <main onMouseMove={track} className="cinematic-grain relative min-h-[100svh] overflow-hidden bg-background">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <span className="astral-haze astral-haze-one" style={shift(-2)} />
-        <span className="astral-haze astral-haze-two" style={shift(-4)} />
-        <span className="astral-light-sweep" />
-        <span className="astral-orbit astral-orbit-one" style={shift(-3)} />
-        <span className="astral-orbit astral-orbit-two" style={shift(-5)} />
-        <span className="astral-vignette" />
-      </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
@@ -116,6 +108,26 @@ function Index() {
               className="absolute inset-0 h-full w-full object-cover opacity-35 transition-transform duration-[2000ms] group-hover:scale-110"
               style={shift(-6)}
             />
+            <div className="aetheris-atmosphere pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+              <span className="aetheris-aura" />
+              <span className="aetheris-wind aetheris-wind-one" />
+              <span className="aetheris-wind aetheris-wind-two" />
+              <span className="aetheris-wind aetheris-wind-three" />
+              <span className="aetheris-energy-ring aetheris-energy-ring-one" />
+              <span className="aetheris-energy-ring aetheris-energy-ring-two" />
+              {Array.from({ length: 12 }).map((_, i) => (
+                <i
+                  key={i}
+                  className="aetheris-mote"
+                  style={{
+                    left: `${10 + ((i * 37) % 82)}%`,
+                    top: `${18 + ((i * 29) % 70)}%`,
+                    animationDelay: `${i * -0.7}s`,
+                    animationDuration: `${6 + (i % 4)}s`,
+                  }}
+                />
+              ))}
+            </div>
             <span className="rune-orbit absolute left-1/2 top-1/2 h-[400px] w-[400px] border border-primary/20" />
             <img
               src={character}
