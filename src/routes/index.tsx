@@ -135,14 +135,18 @@ function Index() {
               ))}
             </div>
             <span className="rune-orbit absolute left-1/2 top-1/2 h-[400px] w-[400px] border border-primary/20" />
-            <img
-              src={character}
-              width={1152}
-              height={1536}
-              alt="Aetheris, an original wind-element swordswoman"
-              className="absolute bottom-0 left-1/2 h-[97%] w-auto max-w-none -translate-x-1/2 object-contain"
+            <div
+              className="absolute bottom-0 left-1/2 h-[97%] w-auto max-w-none -translate-x-1/2"
               style={shift(10)}
-            />
+            >
+              <img
+                src={character}
+                width={1152}
+                height={1536}
+                alt="Aetheris, an original wind-element swordswoman"
+                className="aetheris-float h-full w-auto object-contain"
+              />
+            </div>
             <span className="absolute inset-0 bg-[linear-gradient(0deg,var(--background)_2%,transparent_55%)]" />
             <div className="absolute bottom-10 right-8 text-right sm:right-12">
               <h2 className="font-display text-3xl text-primary sm:text-4xl">Dominance of the Gale</h2>
