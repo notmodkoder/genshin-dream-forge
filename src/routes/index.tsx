@@ -43,6 +43,14 @@ function Index() {
 
   return (
     <main onMouseMove={track} className="cinematic-grain relative min-h-[100svh] overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <span className="astral-haze astral-haze-one" style={shift(-2)} />
+        <span className="astral-haze astral-haze-two" style={shift(-4)} />
+        <span className="astral-light-sweep" />
+        <span className="astral-orbit astral-orbit-one" style={shift(-3)} />
+        <span className="astral-orbit astral-orbit-two" style={shift(-5)} />
+        <span className="astral-vignette" />
+      </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
