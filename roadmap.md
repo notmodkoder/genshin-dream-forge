@@ -1,1 +1,1 @@
-- [ ] Explore additional distinct animated background styles for the Aetheris text area
+- [x] Explore additional distinct animated background styles for the Aetheris text area
