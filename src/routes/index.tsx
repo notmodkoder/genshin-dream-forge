@@ -1,14 +1,13 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Compass, Moon, Settings2 } from "lucide-react";
-import { useState, type CSSProperties, type MouseEvent } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState, type CSSProperties, type MouseEvent } from "react";
+import { Curtain } from "@/components/curtain";
 import character from "@/assets/aetheris-character.png";
 import atmosphere from "@/assets/elemental-atmosphere.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: "Astral — Character Builds, Beautifully Revealed" },
-    { name: "description", content: "Showcase your characters, artifacts, weapons and stats in a cinematic profile." },
+    { name: "description", content: "A cinematic showcase of characters, artifacts, weapons and combat stats." },
     { property: "og:title", content: "Astral — Character Builds" },
     { property: "og:description", content: "A cinematic build showcase for elemental adventurers." },
     { property: "og:type", content: "website" },
@@ -20,55 +19,124 @@ export const Route = createFileRoute("/")({
 function Index() {
   const navigate = useNavigate();
   const [transitioning, setTransitioning] = useState(false);
+  const [entering, setEntering] = useState(true);
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const t = window.setTimeout(() => setEntering(false), 1000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   const enterBuilds = () => {
     setTransitioning(true);
-    window.setTimeout(() => navigate({ to: "/builds" }), 760);
+    window.setTimeout(() => navigate({ to: "/builds" }), 800);
   };
   const track = (event: MouseEvent<HTMLElement>) => {
-    const x = (event.clientX / window.innerWidth - 0.5) * 2;
-    const y = (event.clientY / window.innerHeight - 0.5) * 2;
-    setParallax({ x, y });
+    setParallax({
+      x: (event.clientX / window.innerWidth - 0.5) * 2,
+      y: (event.clientY / window.innerHeight - 0.5) * 2,
+    });
   };
-  const shift = (depth: number): CSSProperties => ({ transform: `translate3d(${parallax.x * depth}px, ${parallax.y * depth}px, 0)` });
+  const shift = (depth: number): CSSProperties => ({
+    transform: `translate3d(${parallax.x * depth}px, ${parallax.y * depth}px, 0)`,
+  });
+
   return (
     <main onMouseMove={track} className="cinematic-grain relative min-h-[100svh] overflow-hidden bg-background">
-      <img src={atmosphere} width={1536} height={1024} alt="" className="absolute inset-0 h-full w-full object-cover object-center opacity-70 transition-transform duration-700" style={shift(-5)} />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_oklab,var(--background)_82%,transparent)_43%,transparent_78%),linear-gradient(0deg,var(--background)_0%,transparent_35%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-80" style={{ background: `radial-gradient(420px circle at ${(parallax.x + 1) * 50}% ${(parallax.y + 1) * 45}%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 70%)` }} />
-      {Array.from({ length: 18 }).map((_, i) => <i key={i} className="absolute h-0.5 w-0.5 rounded-full bg-primary" style={{ left: `${8 + ((i * 31) % 86)}%`, top: `${12 + ((i * 47) % 75)}%`, animation: `twinkle ${3 + (i % 5)}s ease-in-out ${i * .19}s infinite` }} />)}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 2px 2px, var(--primary) 1px, transparent 0)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+      {Array.from({ length: 16 }).map((_, i) => (
+        <i
+          key={i}
+          className="absolute h-0.5 w-0.5 rounded-full bg-primary"
+          style={{
+            left: `${8 + ((i * 31) % 86)}%`,
+            top: `${12 + ((i * 47) % 75)}%`,
+            animation: `twinkle ${3 + (i % 5)}s ease-in-out ${i * 0.19}s infinite`,
+          }}
+        />
+      ))}
 
-      <nav className="hero-rise relative z-30 mx-auto grid w-full max-w-[1500px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-5 sm:px-8 lg:grid-cols-[1fr_auto_1fr] lg:px-12">
-        <a href="/" className="flex min-w-0 items-center gap-3" aria-label="Astral home"><span className="grid size-9 shrink-0 place-items-center border border-primary/40 bg-primary/10 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"><Compass className="size-4 text-primary" /></span><span className="font-display text-xl font-semibold uppercase tracking-[0.2em]">Astral</span></a>
-        <div className="hidden items-center gap-8 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground lg:flex"><span className="text-foreground">Showcase</span><span>Characters</span><span>Archive</span></div>
-        <div className="flex justify-end gap-2"><Button variant="glass" size="icon" aria-label="Theme"><Moon /></Button><Button variant="glass" size="icon" aria-label="Settings"><Settings2 /></Button></div>
-      </nav>
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1500px] flex-col items-stretch gap-8 px-5 py-10 sm:px-8 lg:flex-row lg:items-center lg:gap-14 lg:px-14 lg:py-0">
+        {/* Editorial column — 40% */}
+        <div className="order-2 flex w-full flex-col justify-center lg:order-1 lg:w-[40%]">
+          <div className="slide-in-left">
+            <span className="mb-4 block text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-primary">
+              Anemo Sovereign • Wind Blade
+            </span>
+            <h1 className="mb-5 font-display text-[clamp(4.5rem,13vw,10rem)] leading-[0.85] text-foreground">
+              Aetheris
+            </h1>
+          </div>
 
-      <section className="relative z-10 mx-auto grid min-h-[calc(100svh-84px)] max-w-[1500px] items-center px-5 pb-10 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:px-12">
-        <div className="relative z-20 pt-8 text-center lg:pt-0 lg:text-left">
-          <div className="hero-rise mb-5 flex items-center justify-center gap-3 text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-primary lg:justify-start" style={{ animationDelay: ".15s" }}><span className="h-px w-7 bg-primary/60" /> Genshin character showcase</div>
-          <h1 className="font-display text-[clamp(3.3rem,8vw,7.8rem)] font-medium leading-[0.78] text-foreground">
-            <span className="block overflow-hidden pb-3"><span className="line-reveal block" style={{ animationDelay: ".22s" }}>Your Builds.</span></span>
-            <span className="block overflow-hidden pb-5"><span className="line-reveal block text-primary" style={{ animationDelay: ".34s" }}>Beautifully Revealed.</span></span>
-          </h1>
-          <p className="hero-rise mx-auto mt-2 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base lg:mx-0" style={{ animationDelay: ".5s" }}>Showcase your characters, artifacts, weapons and stats in a cinematic profile built for Genshin players.</p>
-          <div className="hero-rise mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start" style={{ animationDelay: ".62s" }}><Button variant="celestial" size="hero" onClick={enterBuilds}>View your builds <ArrowRight /></Button><Button variant="glass" size="hero">Explore showcase</Button></div>
+          <div className="hero-rise" style={{ animationDelay: ".3s" }}>
+            <p className="mb-9 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+              A sovereign of the high winds, built for sustained elemental damage and precise rotations. Every artifact,
+              weapon and stat, revealed as one cinematic profile.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-6 sm:gap-8">
+              <button
+                onClick={enterBuilds}
+                className="group relative cursor-pointer overflow-hidden bg-primary px-10 py-4 font-display text-2xl tracking-[0.18em] text-primary-foreground transition-colors duration-500 hover:bg-foreground"
+              >
+                <span className="relative z-10">View Builds</span>
+                <span className="absolute inset-0 translate-y-full bg-foreground/20 transition-transform duration-300 group-hover:translate-y-0" />
+              </button>
+              <span className="hidden h-px w-24 bg-primary/30 sm:block" />
+              <span className="font-display text-xl tracking-tight text-primary">001 / 072</span>
+            </div>
+          </div>
         </div>
 
-        <div className="relative -mx-12 mt-4 h-[48svh] min-h-[390px] lg:absolute lg:inset-y-0 lg:right-[-5%] lg:mt-0 lg:h-auto lg:w-[65%]">
-          <div className="absolute left-1/2 top-1/2 h-[66%] w-[54%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20 shadow-[0_0_130px_color-mix(in_oklab,var(--primary)_22%,transparent)]" />
-          <img src={character} width={1152} height={1536} alt="Aetheris, an original wind-element swordswoman" className="hero-rise absolute bottom-[-10%] left-1/2 h-[115%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-[0_30px_40px_color-mix(in_oklab,var(--background)_75%,transparent)] lg:bottom-[-12%] lg:h-[112%]" style={{ ...shift(8), animationDelay: ".3s" }} />
-          <StatCard label="Crit rate" value="72.4%" accent="bg-primary" className="left-[9%] top-[25%] lg:left-[10%]" delay=".78s" />
-          <StatCard label="Crit dmg" value="218.6%" accent="bg-gold" className="right-[5%] top-[39%] lg:right-[8%]" delay=".9s" />
-          <StatCard label="Energy recharge" value="142%" accent="bg-hydro" className="bottom-[12%] left-[14%] lg:left-[21%]" delay="1.02s" />
+        {/* Artwork column — 60% */}
+        <div className="relative order-1 h-[52svh] min-h-[360px] w-full lg:order-2 lg:h-[85vh] lg:w-[60%]">
+          <div className="absolute -right-4 -top-4 z-0 h-64 w-64 border-r-2 border-t-2 border-primary/20" />
+          <div className="absolute -bottom-4 left-10 z-0 h-32 w-32 border-b-2 border-l-2 border-primary/40 lg:left-20" />
+
+          <div className="hero-rise group relative h-full w-full overflow-hidden rounded-tr-[100px] border border-primary/10 bg-card shadow-2xl" style={{ animationDelay: ".55s" }}>
+            <img
+              src={atmosphere}
+              width={1536}
+              height={1024}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover opacity-35 transition-transform duration-[2000ms] group-hover:scale-110"
+              style={shift(-6)}
+            />
+            <span className="rune-orbit absolute left-1/2 top-1/2 h-[400px] w-[400px] border border-primary/20" />
+            <img
+              src={character}
+              width={1152}
+              height={1536}
+              alt="Aetheris, an original wind-element swordswoman"
+              className="absolute bottom-0 left-1/2 h-[104%] w-auto max-w-none -translate-x-1/2 object-contain"
+              style={shift(10)}
+            />
+            <span className="absolute inset-0 bg-[linear-gradient(0deg,var(--background)_2%,transparent_55%)]" />
+            <div className="absolute bottom-10 right-8 text-right sm:right-12">
+              <h2 className="font-display text-3xl text-primary sm:text-4xl">Dominance of the Gale</h2>
+              <p className="text-[0.62rem] uppercase italic tracking-[0.2em] text-muted-foreground">
+                Tier SS+ build available
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.55rem] uppercase tracking-[0.3em] text-muted-foreground lg:flex"><span>Scroll to discover</span><span className="h-10 w-px bg-gradient-to-b from-primary to-transparent" /></div>
-      </section>
-      {transitioning && <div className="portal-enter fixed inset-0 z-50 grid place-items-center bg-background"><div className="size-32 animate-spin rounded-full border border-primary/20 border-t-primary shadow-[0_0_80px_color-mix(in_oklab,var(--primary)_40%,transparent)]" /><span className="absolute font-display text-2xl tracking-[0.24em]">ASTRAL</span></div>}
+      </div>
+
+      {/* Vertical side rail */}
+      <div className="hero-rise pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 flex-col items-center gap-10 xl:flex" style={{ animationDelay: "1s" }}>
+        <span className="h-32 w-px bg-gradient-to-b from-transparent via-primary to-transparent" />
+        <span className="text-[0.6rem] uppercase tracking-[0.5em] text-muted-foreground [writing-mode:vertical-lr]">Astral Archive</span>
+        <span className="h-32 w-px bg-gradient-to-t from-transparent via-primary to-transparent" />
+      </div>
+
+      {entering && <Curtain mode="open" />}
+      {transitioning && <Curtain mode="close" label="ASTRAL" />}
     </main>
   );
-}
-
-function StatCard({ label, value, accent, className, delay }: { label: string; value: string; accent: string; className: string; delay: string }) {
-  return <div className={`hero-rise stat-drift absolute z-20 min-w-28 border border-border bg-card/65 px-3 py-3 shadow-[var(--shadow-celestial)] backdrop-blur-xl sm:min-w-36 sm:px-4 ${className}`} style={{ animationDelay: delay }}><div className="mb-1 flex items-center gap-2 text-[0.48rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground"><span className={`size-1.5 rounded-full ${accent}`} />{label}</div><div className="font-display text-xl text-foreground sm:text-2xl">{value}</div></div>;
 }

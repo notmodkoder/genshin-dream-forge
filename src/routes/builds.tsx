@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ChevronRight, LockKeyhole, Sparkles, Sword, Wind } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Curtain } from "@/components/curtain";
 import character from "@/assets/aetheris-character.png";
 import atmosphere from "@/assets/elemental-atmosphere.jpg";
 
@@ -20,7 +21,12 @@ export const Route = createFileRoute("/builds")({
 function BuildsPage() {
   const navigate = useNavigate();
   const [leaving, setLeaving] = useState(false);
-  const goBack = () => { setLeaving(true); window.setTimeout(() => navigate({ to: "/" }), 690); };
+  const [entering, setEntering] = useState(true);
+  useEffect(() => {
+    const t = window.setTimeout(() => setEntering(false), 1000);
+    return () => window.clearTimeout(t);
+  }, []);
+  const goBack = () => { setLeaving(true); window.setTimeout(() => navigate({ to: "/" }), 800); };
   return <main className="cinematic-grain relative min-h-screen overflow-hidden bg-background px-5 py-5 sm:px-8 lg:px-12">
     <img src={atmosphere} width={1536} height={1024} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
     <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background)_0%,color-mix(in_oklab,var(--background)_86%,transparent)_62%,var(--background)_100%)]" />
@@ -46,7 +52,8 @@ function BuildsPage() {
         <div className="hero-rise mt-5 flex items-center justify-between border border-border bg-card/45 px-4 py-3 backdrop-blur-md" style={{ animationDelay: ".6s" }}><span className="flex items-center gap-2 text-xs text-muted-foreground"><LockKeyhole className="size-3.5 text-gold" /> Build verified</span><span className="text-[0.55rem] uppercase tracking-[0.2em] text-primary">Updated today</span></div>
       </div>
     </section>
-    {leaving && <div className="portal-exit fixed inset-0 z-50 bg-background" />}
+    {entering && <Curtain mode="open" />}
+    {leaving && <Curtain mode="close" label="ASTRAL" />}
   </main>;
 }
 
