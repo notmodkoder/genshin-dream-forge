@@ -1,1 +1,1 @@
-- [ ] Add visible animated gold dust and light currents behind the main-page text area
+- [x] Add visible animated gold dust and light currents behind the main-page text area
