@@ -1,1 +1,1 @@
-- [ ] Move animated background effects into the Aetheris artwork area only
+- [x] Move animated background effects into the Aetheris artwork area only
