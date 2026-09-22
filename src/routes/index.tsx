@@ -44,22 +44,10 @@ function Index() {
   return (
     <main onMouseMove={track} className="cinematic-grain relative min-h-[100svh] overflow-hidden bg-background">
       <div className="editorial-atmosphere pointer-events-none absolute inset-y-0 left-0 w-full overflow-hidden lg:w-[48%]" aria-hidden="true">
-        <span className="editorial-glow editorial-glow-one" />
-        <span className="editorial-glow editorial-glow-two" />
-        <span className="editorial-current editorial-current-one" />
-        <span className="editorial-current editorial-current-two" />
-        {Array.from({ length: 24 }).map((_, i) => (
-          <i
-            key={i}
-            className="editorial-dust"
-            style={{
-              left: `${4 + ((i * 29) % 92)}%`,
-              top: `${8 + ((i * 43) % 88)}%`,
-              animationDelay: `${i * -0.46}s`,
-              animationDuration: `${7 + (i % 6)}s`,
-            }}
-          />
-        ))}
+        <span className="wind-map wind-map-one" />
+        <span className="wind-map wind-map-two" />
+        <span className="wind-pressure-wave" />
+        <span className="wind-map-glow" />
       </div>
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.12]"
