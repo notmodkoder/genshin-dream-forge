@@ -1,1 +1,1 @@
-- [x] Add subtle animated background layers to the unchanged landing page
+- [ ] Move animated background effects into the Aetheris artwork area only
