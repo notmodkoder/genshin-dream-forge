@@ -1,1 +1,1 @@
-- [ ] Add subtle animated background layers to the unchanged landing page
+- [x] Add subtle animated background layers to the unchanged landing page
