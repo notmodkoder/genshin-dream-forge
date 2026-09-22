@@ -187,6 +187,21 @@
   72% { opacity: .35; }
   100% { opacity: 0; transform: translate3d(14px, -90px, 0) scale(1.15); }
 }
+@keyframes editorial-glow-drift {
+  0%, 100% { opacity: .16; transform: translate3d(-8%, 6%, 0) scale(.9); }
+  50% { opacity: .34; transform: translate3d(12%, -8%, 0) scale(1.12); }
+}
+@keyframes editorial-current-flow {
+  0% { opacity: 0; transform: translate3d(-75%, 28px, 0) rotate(-9deg); }
+  28%, 68% { opacity: .42; }
+  100% { opacity: 0; transform: translate3d(90%, -36px, 0) rotate(-9deg); }
+}
+@keyframes editorial-dust-drift {
+  0% { opacity: 0; transform: translate3d(-5px, 32px, 0) scale(.55); }
+  25% { opacity: .8; }
+  70% { opacity: .32; }
+  100% { opacity: 0; transform: translate3d(18px, -92px, 0) scale(1.25); }
+}
 
 @utility hero-rise { animation: hero-rise .9s cubic-bezier(.2,.8,.2,1) both; }
 @utility slide-in-left { animation: slide-right 1.2s cubic-bezier(.22,1,.36,1) both; }
@@ -271,6 +286,57 @@
   box-shadow: 0 0 10px color-mix(in oklab, var(--primary) 90%, transparent);
   will-change: transform, opacity;
   animation: aetheris-mote-rise 8s ease-in-out infinite;
+}
+
+.editorial-atmosphere {
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(90deg, black 0 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, black 0 72%, transparent 100%);
+}
+
+.editorial-glow {
+  position: absolute;
+  display: block;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklab, var(--primary) 24%, transparent), transparent 68%);
+  filter: blur(65px);
+  will-change: transform, opacity;
+  animation: editorial-glow-drift 13s ease-in-out infinite;
+}
+
+.editorial-glow-one { left: -16rem; top: 3%; }
+.editorial-glow-two { bottom: -18rem; right: -8rem; animation-delay: -6.5s; animation-duration: 17s; }
+
+.editorial-current {
+  position: absolute;
+  left: 0;
+  width: 74%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 72%, transparent), transparent);
+  box-shadow: 0 0 22px color-mix(in oklab, var(--primary) 34%, transparent);
+  will-change: transform, opacity;
+  animation: editorial-current-flow 10s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+
+.editorial-current-one { top: 34%; }
+.editorial-current-two { top: 68%; animation-delay: -5s; animation-duration: 14s; }
+
+.editorial-dust {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 12px color-mix(in oklab, var(--primary) 85%, transparent);
+  will-change: transform, opacity;
+  animation: editorial-dust-drift 9s ease-in-out infinite;
+}
+
+@media (max-width: 1023px) {
+  .editorial-atmosphere { width: 100%; opacity: .8; }
 }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
