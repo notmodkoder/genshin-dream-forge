@@ -1,1 +1,1 @@
-- [x] Add visible animated gold dust and light currents behind the main-page text area
+- [ ] Explore additional distinct animated background styles for the Aetheris text area
