@@ -1,1 +1,1 @@
-- [x] Move animated background effects into the Aetheris artwork area only
+- [ ] Add visible animated gold dust and light currents behind the main-page text area
